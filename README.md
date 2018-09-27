@@ -1,7 +1,7 @@
 # CubeMate
 
 - - - - - - - 
-## Database Queries
+## Database Queries.rtf
 
 Contains the queries used to insert the necessary database into the MySQL database for the project.
 
