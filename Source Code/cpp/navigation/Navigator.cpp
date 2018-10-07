@@ -1,7 +1,5 @@
 /*
- Project derived from an idea by a group of three members (Jared Huang, Sana Shrikant, and Akaash Venkat) working on Northrop Grumman’s
-    2018 Intern Hackathon at the Woodland Hills Campus.
- Code written by Akaash Venkat.
+ @author Akaash Venkat
  */
 
 #include "Navigator.h"
@@ -54,13 +52,36 @@ Node* Node::getParent()
     return parent;
 }
 
-int Node::getG() { return g; }
-int Node::getH() { return h; }
-int Node::getF() { return f; }
+int Node::getG()
+{
+    return g;
+}
 
-void Node::setG(int val) { g = val; }
-void Node::setH(int val) { h = val; }
-void Node::setF(int val) { f = val; }
+int Node::getH()
+{
+    return h;
+}
+
+int Node::getF()
+{
+    return f;
+}
+
+void Node::setG(int val)
+{
+    g = val;
+}
+
+void Node::setH(int val)
+{
+    h = val;
+}
+
+void Node::setF(int val)
+{
+    f = val;
+}
+
 
 
 Navigator::Navigator(char m_building, int m_floor, int startX, int startY, int endX, int endY)
@@ -68,6 +89,7 @@ Navigator::Navigator(char m_building, int m_floor, int startX, int startY, int e
     startNode = new Node(startX, startY);
     endNode = new Node(endX, endY);
     openList.push_back(startNode);
+    
     building = m_building;
     floor = m_floor;
 }
@@ -83,6 +105,7 @@ vector< vector<int> > Navigator::navigate()
     {
         Node* currNode = openList[0];
         int currIndex = 0;
+        
         for (int i = 0; i < openList.size(); i++)
         {
             if (openList[i]->getF() < currNode->getF())
@@ -100,36 +123,38 @@ vector< vector<int> > Navigator::navigate()
             vector< vector<int> > revPath;
             vector< vector<int> > path;
             Node* c = currNode;
+            
             while (c != NULL)
             {
                 revPath.push_back(c->getCoords());
                 c = c->getParent();
             }
+            
             for (int i = 0; i < revPath.size(); i++)
-            {
                 path.push_back(revPath[revPath.size() - i - 1]);
-            }
+            
             vector< vector<int> > refinedPath = refinePath(path);
             return refinedPath;
         }
         
         vector<Node*> children;
         vector< vector<int> > neighbors = sqlConnector.getNeighbors(building, floor, currNode->getCoords());
+        
         for (int i = 0; i < neighbors.size(); i++)
         {
             vector<int> neighbor = neighbors[i];
             Node* newNode = new Node(neighbor[0], neighbor[1], currNode);
             children.push_back(newNode);
         }
+        
         for (int j = 0; j < children.size(); j++)
         {
             for (int k = 0; k < closedList.size(); k++)
             {
                 if (children[j]->isEqual(closedList[k]))
-                {
                     continue;
-                }
             }
+            
             children[j]->setG(currNode->getG() + 1);
             children[j]->setH((children[j]->getCoords()[0] - endNode->getCoords()[0]) * (children[j]->getCoords()[0] - endNode->getCoords()[0]) + (children[j]->getCoords()[1] - endNode->getCoords()[1]) * (children[j]->getCoords()[1] - endNode->getCoords()[1]));
             children[j]->setF(children[j]->getG() + children[j]->getH());
@@ -137,9 +162,7 @@ vector< vector<int> > Navigator::navigate()
             for (int k = 0; k < openList.size(); k++)
             {
                 if (children[j]->isEqual(openList[k]) && children[j]->getG() > openList[k]->getG())
-                {
                     continue;
-                }
             }
             openList.push_back(children[j]);
         }
@@ -151,20 +174,18 @@ vector< vector<int> > Navigator::refinePath(vector< vector<int> > initialPath)
     SqlConn sqlConnector;
     vector< vector<int> > refinedPath;
     refinedPath.push_back(initialPath[0]);
+    
     for (int i = 1; i < initialPath.size() - 1; i++)
     {
         if (((initialPath[i][0] == initialPath[i - 1][0]) && (initialPath[i][0] == initialPath[i + 1][0])) || ((initialPath[i][1] == initialPath[i - 1][1]) && (initialPath[i][1] == initialPath[i + 1][1])))
         {
             if (sqlConnector.isLandmark(building, floor, initialPath[i]) == true)
-            {
                 refinedPath.push_back(initialPath[i]);
-            }
         }
         else
-        {
             refinedPath.push_back(initialPath[i]);
-        }
     }
+    
     refinedPath.push_back(initialPath[initialPath.size() - 1]);
     return refinedPath;
 }

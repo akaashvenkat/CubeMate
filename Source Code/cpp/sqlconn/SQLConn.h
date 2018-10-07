@@ -1,7 +1,5 @@
 /*
- Project derived from an idea by a group of three members (Jared Huang, Sana Shrikant, and Akaash Venkat) working on Northrop Grumman’s
-    2018 Intern Hackathon at the Woodland Hills Campus.
- Code written by Akaash Venkat.
+ @author Akaash Venkat
  */
 
 #ifndef SQLCONN_H
@@ -31,9 +29,6 @@ public:
 
     Coordinate getStart(int sID);
     Coordinate getEnd(int eID);
-    vector<Landmark> getLandmarks();
-    vector<Coordinate> getIntermediates();
-    vector<Segment> getSegments();
     vector< vector<int> > getNeighbors(char building, int floor, vector<int> coord);
     vector<string> getIntermediate(char building, int floor, vector<int> coord);
     vector<string> getLandmark(char building, int floor, vector<int> coord);
@@ -42,14 +37,6 @@ public:
 private:
     sql::Driver *driver;
     sql::Connection *con;
-    
-    vector<Landmark> landmarkList;
-    vector<Coordinate> intermediateList;
-    vector<Segment> segmentList;
-    
-    void loadLandmarks();
-    void loadIntermediates();
-    void loadSegments();
 };
 
 #endif

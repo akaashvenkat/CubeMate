@@ -1,7 +1,5 @@
 /*
- Project derived from an idea by a group of three members (Jared Huang, Sana Shrikant, and Akaash Venkat) working on Northrop Grumman’s
-    2018 Intern Hackathon at the Woodland Hills Campus.
- Code written by Akaash Venkat.
+ @author Akaash Venkat
  */
 
 #ifndef SOCKET_H
@@ -23,6 +21,7 @@
 #include <vector>
 
 using namespace std;
+
 #define SOCKET_PATH "/tmp/server.sock"
 #define OUT_FILE "../navigation.txt"
 
@@ -43,9 +42,8 @@ private:
     socklen_t clientlen;
     unsigned int client;
     int server, nread, buflen;
-    char *buf;
-    
     int startID, endID;
+    char *buf;
     bool valid;
     
     static void sigCall(int sig);

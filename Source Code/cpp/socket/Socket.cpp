@@ -1,7 +1,5 @@
 /*
- Project derived from an idea by a group of three members (Jared Huang, Sana Shrikant, and Akaash Venkat) working on Northrop Grumman’s
-    2018 Intern Hackathon at the Woodland Hills Campus.
- Code written by Akaash Venkat.
+ @author Akaash Venkat
  */
 
 #include <arpa/inet.h>
@@ -17,9 +15,11 @@
 #include <sys/types.h>
 #include <sys/un.h>
 #include <unistd.h>
+#include <vector>
 
 #include "Socket.h"
 using namespace std;
+
 #define SOCKET_PATH "/tmp/server.sock"
 #define OUT_FILE "../navigation.txt"
 
@@ -34,6 +34,7 @@ Socket::Socket()
     strcpy(server_addr.sun_path, SOCKET_PATH);
     
     server = socket(PF_UNIX, SOCK_STREAM, 0);
+    
     if (!server)
     {
         perror("socket");
@@ -49,6 +50,7 @@ Socket::Socket()
         perror("listen");
         exit(-1);
     }
+    
     clientlen = sizeof(client_addr);
     buflen = 1024;
     buf = new char[buflen+1];
@@ -70,12 +72,12 @@ void Socket::read()
     istringstream iss(buf);
     int i = 0;
     int arr[2];
+    
     for (buf; iss >> buf; i++)
     {
         if (i == 2)
-        {
             break;
-        }
+
         arr[i] = stoi(buf,&sz);
     }
 
@@ -83,27 +85,32 @@ void Socket::read()
     endID = arr[1];
     
     if (strcmp(buf, "99") == 0)
-    {
         valid = true;
-    }
     else
-    {
         valid = false;
-    }
 }
 
 void Socket::write(vector<string> instructions)
 {
     if (appendFile(instructions) == true)
-    {
         send(client, buf, 2, 0);
-    }
     close(client);
 }
 
-int Socket::getStartID() { return startID; }
-int Socket::getEndID() { return endID; }
-bool Socket::getValidity() { return valid; }
+int Socket::getStartID()
+{
+    return startID;
+}
+
+int Socket::getEndID()
+{
+    return endID;
+}
+
+bool Socket::getValidity()
+{
+    return valid;
+}
 
 void Socket::sigCall(int sig)
 {
@@ -114,15 +121,13 @@ void Socket::sigCall(int sig)
 bool Socket::appendFile(vector<string> instructions)
 {
     if (instructions.size() == 0)
-    {
         return false;
-    }
     
     ofstream outfile;
     outfile.open(OUT_FILE);
+    
     for(size_t i = 0; i < instructions.size(); i++)
-    {
         outfile << instructions.at(i) << endl;
-    }
+    
     return true;
 }

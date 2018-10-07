@@ -1,7 +1,5 @@
 /*
- Project derived from an idea by a group of three members (Jared Huang, Sana Shrikant, and Akaash Venkat) working on Northrop Grumman’s
-    2018 Intern Hackathon at the Woodland Hills Campus.
- Code written by Akaash Venkat.
+ @author Akaash Venkat
  */
 
 #include <math.h>
@@ -43,10 +41,12 @@ void PathManager::loadPaths()
         point1.building = start.building;
         point1.xCoord = start.xCoord;
         point1.yCoord = start.yCoord;
+        
         point2.floor = end.floor;
         point2.building = end.building;
         point2.xCoord = end.xCoord;
         point2.yCoord = end.yCoord;
+        
         path1.from = point1;
         path1.to = point2;
         paths.push_back(path1);
@@ -105,6 +105,7 @@ void PathManager::loadPaths()
         point4.building = end.building;
         point4.xCoord = end.xCoord;
         point4.yCoord = end.yCoord;
+        
         path1.from = point1;
         path1.to = point2;
         path2.from = point3;
@@ -121,10 +122,12 @@ void PathManager::loadPaths()
         point1.building = start.building;
         point1.xCoord = start.xCoord;
         point1.yCoord = start.yCoord;
+        
         point2.floor = start.floor;
         point2.building = start.building;
         point2.xCoord = 5;
         point2.yCoord = 10;
+        
         path1.from = point1;
         path1.to = point2;
         paths.push_back(path1);
@@ -138,10 +141,12 @@ void PathManager::loadPaths()
             point3.building = end.building;
             point3.xCoord = 5;
             point3.yCoord = 4;
+            
             point4.floor = end.floor;
             point4.building = end.building;
             point4.xCoord = end.xCoord;
             point4.yCoord = end.yCoord;
+            
             path2.from = point3;
             path2.to = point4;
             paths.push_back(path2);
@@ -155,10 +160,12 @@ void PathManager::loadPaths()
             point3.building = 'A';
             point3.xCoord = 5;
             point3.yCoord = 4;
+            
             point4.floor = 1;
             point4.building = 'A';
             point4.xCoord = 9;
             point4.yCoord = 5;
+            
             path2.from = point3;
             path2.to = point4;
             paths.push_back(path2);
@@ -167,10 +174,12 @@ void PathManager::loadPaths()
             point5.building = end.building;
             point5.xCoord = 9;
             point5.yCoord = 3;
+            
             point6.floor = end.floor;
             point6.building = end.building;
             point6.xCoord = end.xCoord;
             point6.yCoord = end.yCoord;
+            
             path3.from = point5;
             path3.to = point6;
             paths.push_back(path3);
@@ -187,10 +196,12 @@ void PathManager::loadPaths()
             point1.building = start.building;
             point1.xCoord = start.xCoord;
             point1.yCoord = start.yCoord;
+            
             point2.floor = start.floor;
             point2.building = start.building;
             point2.xCoord = 5;
             point2.yCoord = 4;
+            
             path1.from = point1;
             path1.to = point2;
             paths.push_back(path1);
@@ -204,10 +215,12 @@ void PathManager::loadPaths()
             point1.building = start.building;
             point1.xCoord = start.xCoord;
             point1.yCoord = start.yCoord;
+            
             point2.floor = start.floor;
             point2.building = start.building;
             point2.xCoord = 9;
             point2.yCoord = 3;
+            
             path1.from = point1;
             path1.to = point2;
             paths.push_back(path1);
@@ -216,10 +229,12 @@ void PathManager::loadPaths()
             point3.building = 'A';
             point3.xCoord = 9;
             point3.yCoord = 5;
+            
             point4.floor = 1;
             point4.building = 'A';
             point4.xCoord = 5;
             point4.yCoord = 4;
+            
             path2.from = point3;
             path2.to = point4;
             paths.push_back(path2);
@@ -232,10 +247,12 @@ void PathManager::loadPaths()
         pointY.building = end.building;
         pointY.xCoord = 5;
         pointY.yCoord = 10;
+        
         pointZ.floor = end.floor;
         pointZ.building = end.building;
         pointZ.xCoord = end.xCoord;
         pointZ.yCoord = end.yCoord;
+        
         pathLast.from = pointY;
         pathLast.to = pointZ;
         paths.push_back(pathLast);
