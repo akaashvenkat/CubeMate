@@ -24,7 +24,7 @@ SqlConn::SqlConn()
     {
         driver = get_driver_instance();
         con = driver->connect("tcp://127.0.0.1:3306", "root", "pass");
-        con->setSchema("CubeMate");
+        con->setSchema("iTurn");
     }
     catch (sql::SQLException &e)
     {

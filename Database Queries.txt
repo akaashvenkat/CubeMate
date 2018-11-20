@@ -1,6 +1,6 @@
 
-CREATE DATABASE CubeMate;
-USE CubeMate;
+CREATE DATABASE iTurn;
+USE iTurn;
 
 CREATE TABLE IF NOT EXISTS Regions 
 (

@@ -14,7 +14,7 @@
       <div class="container">
         <div id="branding">
           <h1>
-            CubeMate
+            iTurn
           </h1>
         </div>
         <nav>

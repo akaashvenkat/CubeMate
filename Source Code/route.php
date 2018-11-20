@@ -13,8 +13,8 @@
       <header>
         <div class="container">
           <div id="branding">
-	          <h1>
-              CubeMate
+            <h1>
+              iTurn
             </h1>
           </div>
           <nav>
@@ -118,7 +118,7 @@
                       {
                         $sID = $_GET['sRoom'];
                       }
-                      $db = new mysqli('127.0.0.1', 'root', 'pass', 'CubeMate');
+                      $db = new mysqli('127.0.0.1', 'root', 'pass', 'iTurn');
                       if ($db->connect_errno > 0) 
                       {
                         die('Unable to connect to database [' . $db->connect_error . ']');
@@ -241,7 +241,7 @@
                       {
                         $eID = $_GET['eRoom'];
                       }
-                      $db = new mysqli('127.0.0.1', 'root', 'pass', 'CubeMate');
+                      $db = new mysqli('127.0.0.1', 'root', 'pass', 'iTurn');
                       if ($db->connect_errno> 0) 
                       {
                         die('Unable to connect to database [' . $db->connect_error . ']');
@@ -374,7 +374,7 @@
                   {
                     echo "&nbsp</br>";   
                   }
-                  exec('cd /Users/akaashvenkat/Sites/cubeMate/cpp/ && ./main_cpp 2>&1');
+                  exec('cd /Users/akaashvenkat/Sites/iTurn/cpp/ && ./main_cpp 2>&1');
                   exec('chmod 777 /tmp/server.sock 2>&1');
                   error_reporting(E_ALL);
                   if (!($sock = socket_create(AF_UNIX, SOCK_STREAM, 0)))
